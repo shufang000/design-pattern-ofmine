@@ -11,13 +11,15 @@ import java.util.concurrent.Executors;
  * NOTE：懒汉式没有将方法加synchronized修饰的会有线程安全问题
  */
 public final class SafeLazySingleton {
-
+    //私有化静态属性
     private static SafeLazySingleton safeLazySingleton;
 
+    //私有化构造器
     private SafeLazySingleton() {
         System.out.println("inited");
     }
 
+    //静态方法获取实例对象
     public static synchronized SafeLazySingleton getInstance() {
         if (safeLazySingleton == null) {
             safeLazySingleton = new SafeLazySingleton();
@@ -25,8 +27,8 @@ public final class SafeLazySingleton {
         return safeLazySingleton;
     }
 
+    // 测试利用多线程创建该实例
     public static void main(String[] args) {
-
         //创建固定数量线程池
         ExecutorService pool = Executors.newFixedThreadPool(10);
 
